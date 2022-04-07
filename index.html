@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clique</title>
+</head>
+
+<body>
+    <style>
+        @font-face {
+            font-family: "Custom";
+            src: url("font.ttf");
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: "Custom", serif;
+            background-color: black;
+            display: flex;
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            user-select: none;
+        }
+
+        #copyright {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(99, 99, 99);
+        }
+
+        #cover {
+            position: absolute;
+            background-color: black;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: "Custom", serif;
+            font-size: 50px;
+            z-index: 2;
+        }
+    </style>
+    <!-- Coucou les curieux -->
+    <div id="cover">Clique</div>
+    <video id="video" loop width="720">
+        <source src="looped.mp4" type="video/mp4">
+    </video>
+    <script>
+        let nombreDetirageDeChapeau = 0;
+        const chapeau = document.getElementById('chapeau');
+        const video = document.getElementById('video');
+        const cover = document.getElementById('cover');
+        const tirageDeChapeau = () => {
+            nombreDetirageDeChapeau++;
+            chapeau.textContent = `Tirage de chapeau: ${nombreDetirageDeChapeau}`;
+            document.title = `Tu as été banquaroulé ${nombreDetirageDeChapeau} fois`
+        }
+        const roll = () => {
+            cover.style.display = 'none';
+            document.title = 'Tu as été banquaroulé';
+            video.play();
+            setTimeout(() => {
+                tirageDeChapeau()
+                setInterval(() => { tirageDeChapeau(); }, 9500);
+            }, 4550);
+        }
+        document.addEventListener('click', roll);
+    </script>
+</body>
+
+</html>
